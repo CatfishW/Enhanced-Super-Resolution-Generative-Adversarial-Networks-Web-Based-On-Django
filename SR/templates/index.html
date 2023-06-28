@@ -1,0 +1,307 @@
+{% load static %}
+<html lang="zh">
+  <head>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-313180-14');
+    </script>
+	
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="viewport" content="initial-scale=1.0,width=device-width">
+    <link href="/static/style.css" rel="stylesheet" type="text/css">
+    <link href="/static/mobile.css" rel="stylesheet" type="text/css" media="screen and (max-width: 768px) and (min-width: 0px)">
+    <script src="/static/ui.js"></script>
+    <div class="all-page">
+      <div id="login" style="text-align: right; width: 100%; font-size: 0.8em">
+      </div>
+      <h1 class="main-title">基于ESRGAN生成对抗网络的遥感图像超分辨率重建</h1>
+    <div style="width: 100%;height:300px">
+	<img src="/static/SRGAN.jpeg" style="width: 100%;height:100%">
+	</div>
+      <div class="choose-lang">
+	<a href="">
+	  English
+	</a>
+	/
+	<a href="index.ja.html">
+	  日本語
+	</a>
+	/
+	<a href="index.ru.html">
+	  Русский
+	</a>
+	/
+	<a href="index.pt.html">
+	  Português
+	</a>
+	/
+	<a href="index.es.html">
+	  Español
+	</a>
+	/
+	<a href="index.fr.html">
+	  Français
+	</a>
+	/
+	<a href="index.de.html">
+	  Deutsch
+	</a>
+	/
+	<a href="index.tr.html">
+	  Türkçe
+	</a>
+	/
+	<a href={% url 'zh' %}>
+	  简体中文
+	</a>
+	/
+	<a href="index.zh-TW.html">
+	  繁體中文
+	</a>
+	/
+	<a href="index.ko.html">
+	  한국어
+	</a>
+	/
+	<a href="index.nl.html">
+	  Nederlands
+	</a>
+	/
+	<a href="index.ca.html">
+	  Català
+	</a>
+	/
+	<a href="index.ro.html">
+	  Română
+	</a>
+	/
+	<a href="index.it.html">
+	  Italiano
+	</a>
+	/
+	<a href="index.eo.html">
+	  Esperanto
+	</a>
+	/
+	<a href="index.no.html">
+	  Bokmål
+	</a>
+	/
+	<a href="index.uk.html">
+	  Українська
+	</a>
+	/
+	<a href="index.pl.html">
+	  Polski
+	</a>
+	/
+	<a href="index.bg.html">
+	  Български
+	</a>
+      </div>
+      <p>使用ESRGAN增强型生成对抗网络进行遥感图像超分辨率处理，同时也支持其他类型照片处理。</p>
+      <p class="margin1 link-box">
+	<a href="https://raw.githubusercontent.com/nagadomi/nunif/master/waifu2x/docs/images/slide.png" class="blue-link" target="_blank">
+	  小组成员：伍彦来、何俊
+	</a>
+	| 
+	<a href="https://github.com/CatfishW/" class="blue-link" target="_blank">
+	  前往伍彦来的GitHub主页
+	<form method="post" enctype="multipart/form-data">
+	</a>
+      </p>
+        <input type="hidden" name="recap" id="recap_response">
+	<div class="option-box first">
+	  <div class="option-left">选择图片（支持拖放）：</div>
+	  <div class="option-right">
+	    <input type="text" id="url" name="url" placeholder="输入图片链接">
+	    <div class="option-right-small">
+	      或选择文件：
+			{% csrf_token %}
+	      <input type="file" id="file" name="picture" required>
+	    </div>
+	  </div>
+	  <div class="option-hint file_limits">
+	    限制：大小：5MB以内
+	  </div>
+	</div>
+	<div class="option-box">
+	  <div class="option-left">
+	    风格：
+	  </div>
+	  <div class="option-right">
+	    <label><input type="radio" name="style" class="radio" value="art" checked>
+	      <span class="r-text" title="遥感图像">
+		遥感图像🛰
+	      </span>
+	    </label>
+	    <label><input type="radio" name="style" class="radio" value="art_scan">
+	      <span class="r-text" title="漫画、动漫截图、动漫风格艺术">
+		艺术图像🎨
+	      </span>
+	    </label>
+	    <label><input type="radio" name="style" class="radio" value="photo">
+	      <span class="r-text" title="照片">
+		现实图像📷
+	      </span>
+	    </label>
+	  </div>
+	</div>
+	<div class="option-box">
+	  <div class="option-left">
+	    降噪：
+	    <div class="option-left-small">
+	      （期望JPEG伪影）
+	    </div>
+	  </div>
+	  <div class="option-right">
+	    <label><input type="radio" name="noise" class="radio" value="-1">
+	      <span class="r-text">
+		无
+	      </span>
+	    </label>
+	    <label><input type="radio" name="noise" class="radio" value="0" checked>
+	      <span class="r-text">
+		低
+	      </span>
+	    </label>
+	    <label><input type="radio" name="noise" class="radio" value="1" checked>
+	      <span class="r-text">
+		中
+	      </span>
+	    </label>
+	    <label>
+	      <input type="radio" name="noise" class="radio" value="2">
+	      <span class="r-text">
+		高
+	      </span>
+	    </label>
+	    <label>
+	      <input type="radio" name="noise" class="radio" value="3">
+	      <span class="r-text">
+		最高
+	      </span>
+	    </label>
+	  </div>
+	  <div class="option-hint">
+	    如果图像实际上有噪点，请使用降噪功能，否则可能会产生相反的效果。
+	  </div>
+	</div>
+	<div class="option-box">
+	  <div class="option-left">
+	    放大倍数：
+	    <div class="option-left-small"></div>
+	  </div>
+	  <div class="option-right">
+	    <label><input type="radio" name="scale" class="radio" value=2 checked>
+	      <span class="r-text">
+		2倍🚗
+	      </span>
+	    </label>
+	    <label><input type="radio" name="scale" class="radio" value=4>
+	      <span class="r-text">
+		4倍✈
+	      </span>
+	    </label>
+	    <label><input type="radio" name="scale" class="radio" value=8>
+	      <span class="r-text">
+		8倍🚀
+	      </span>
+	    </label>
+	  </div>
+	</div>
+	<div class="option-box">
+	  <div class="option-left">
+	    图像格式：
+	    <div class="option-left-small"></div>
+	  </div>
+	  <div class="option-right">
+	    <label><input type="radio" name="format" class="radio" value="0" checked>
+	      <span class="r-text">
+                PNG
+	      </span>
+	    </label>
+	    <label><input type="radio" name="format" class="radio" value="1">
+	      <span class="r-text">
+		WebP
+	      </span>
+	    </label>
+	  </div>
+	</div>
+	<div id="recap_container">
+	</div>
+	<script>
+	document.getElementById('submit-button').addEventListener('click', function() {
+		var imageContainer = document.getElementById('image-container');
+		
+		// 创建img元素
+		var image = document.getElementById('img');
+		
+		// 设置要加载的图片的URL
+		image.src = 'static/result/out.png';
+		
+		// 将图片添加到容器中
+		//imageContainer.appendChild(image);
+	});
+	</script>	
+	<input id="submit-button" type="submit" class="button" value="转换">		
+	
+	</form>
+	
+	{% comment %} <form method="post">
+	 {% csrf_token %}
+	
+	</form> {% endcomment %}
+	<div class="bottom-hint">
+	  <ul>
+	      <li>如果您使用的是Firefox，请按CTRL+S键保存图片。"保存图片"选项无效。</li>
+	  </ul>
+
+	</div>
+      
+
+	<div class="image-container">
+		<div class="img background-img"></div>
+		<div class="img foreground-img"></div>
+		<input
+			type="range"
+			min="1"
+			max="100"
+			value="50"
+			class="slider"
+			name="slider"
+			id="slider"
+		/>
+	{% comment %} <img id = "result-img" src="static/result/out.png" alt="result" width=690 height=600> {% endcomment %}
+	</div>
+	<script>
+		const slider = document.getElementById("slider");
+		slider.addEventListener("input", function(e) {
+		document.querySelector(".foreground-img").style.width =
+			e.target.value + "%";
+		});
+	</script>
+	</form>
+	<form method = 'post'>
+		{% csrf_token %}
+	<input id="download-button" type="submit" name="download" value="下载图片" class="button">
+
+	</form>
+      </div>
+      <div class="bottom-hint">
+        </div>
+	  该网站仅用作重庆交通大学计算机视觉综合实践项目，不得用于商业用途。 
+	</div>
+      </div>
+    </div>
+    <div class="bottom-info address">
+      <a href="https://github.com/CatfishW" class="gray-link" target="_blank">伍彦来</a>,
+      <a href="https://github.com/" class="gray-link" target="_blank">何骏</a>
+    </div>
+
+  </body>
+</html>
